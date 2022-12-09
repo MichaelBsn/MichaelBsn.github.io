@@ -12,41 +12,28 @@ body {
 }
 
 #keyboard {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  height: 300px;
+  width: 600px;
 }
 
-.octave {
-  height: 300px;
-  width: 50%;
-}
-.octave button {
-  width: 3em;
+#keyboard button {
+  width: 50px;
   height: 100%;
+  position: relative;
+  float: left;
 }
-.octave button:nth-child(1),
-.octave button:nth-child(3),
-.octave button:nth-child(5),
-.octave button:nth-child(6),
-.octave button:nth-child(8),
-.octave button:nth-child(10),
-.octave button:nth-child(12) {
+#keyboard .natural {
   z-index: 1;
   background-color: white;
 }
-.octave button:nth-child(2),
-.octave button:nth-child(4),
-.octave button:nth-child(7),
-.octave button:nth-child(9),
-.octave button:nth-child(11) {
-  height: 150px;
+#keyboard .sharp {
+  height: 50%;
   background-color: black;
   z-index: 2;
   position: absolute;
   transform: translate(-25px);
-  border: 1px solid white;
+  border: 2px solid white;
 }
 
 /*# sourceMappingURL=piano.css.map */
