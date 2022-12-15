@@ -5,23 +5,50 @@ let noteOsc;
 
 function makeBeep(hertz) {
     noteOsc = audioContext.createOscillator();
+
     noteOsc.frequency.setValueAtTime(hertz, 0)
+    noteOsc.type = 'triangle'
+
+
     noteOsc.connect(primaryGain);
     noteOsc.start();
-    noteOsc.stop(audioContext.currentTime + 0.25)
 }
 
-function drawInstrument() {
+function drawKeyF4() {
     let key = document.createElement('button')
-    key.addEventListener('click', () => makeBeep(440))
+
+    key.addEventListener('mousedown', () => makeBeep(349.228))
+    key.addEventListener('mouseup', () => noteOsc.stop())
+
     key.className = 'key'
     container.appendChild(key)
 }
+function drawKeyA4() {
+    let key = document.createElement('button')
 
-document.querySelector('#init-btn').addEventListener('click', () => {
+    key.addEventListener('mousedown', () => makeBeep(440))
+    key.addEventListener('mouseup', () => noteOsc.stop())
+
+    key.className = 'key'
+    container.appendChild(key)
+}
+function drawKeyC5() {
+    let key = document.createElement('button')
+
+    key.addEventListener('mousedown', () => makeBeep(523.251))
+    key.addEventListener('mouseup', () => noteOsc.stop())
+
+    key.className = 'key'
+    container.appendChild(key)
+}
+const initBtn = document.querySelector('#init-btn')
+initBtn.addEventListener('click', () => {
     audioContext = new AudioContext()
     primaryGain = audioContext.createGain()
     primaryGain.gain.setValueAtTime(0.05, 0)
     primaryGain.connect(audioContext.destination)
-    drawInstrument()
+    initBtn.className = 'hide'
+    drawKeyF4()
+    drawKeyA4()
+    drawKeyC5()
 })
