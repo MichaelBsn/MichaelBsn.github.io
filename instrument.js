@@ -1,46 +1,54 @@
 let container = document.querySelector('.instrument-container')
 let audioContext;
 let primaryGain;
-let noteOsc;
-
-function makeBeep(hertz) {
-    noteOsc = audioContext.createOscillator();
-
-    noteOsc.frequency.setValueAtTime(hertz, 0)
-    noteOsc.type = 'triangle'
 
 
-    noteOsc.connect(primaryGain);
-    noteOsc.start();
+let noteOscF4;
+function makeBeepF4() {
+    noteOscF4 = audioContext.createOscillator();
+
+    noteOscF4.frequency.setValueAtTime(349.228, 0)
+    noteOscF4.type = 'triangle'
+
+    noteOscF4.connect(primaryGain);
+    noteOscF4.start();
 }
-
 function drawKeyF4() {
     let key = document.createElement('button')
 
-    key.addEventListener('mousedown', () => makeBeep(349.228))
-    key.addEventListener('mouseup', () => noteOsc.stop())
+    key.addEventListener('mousedown', () => makeBeepF4())
+    key.addEventListener('mouseup', () => noteOscF4.stop())
+    key.addEventListener('touchstart', () => makeBeepF4())
+    key.addEventListener('touchend', () => noteOscF4.stop())
 
+    key.innerText = 'F4'
     key.className = 'key'
     container.appendChild(key)
+}
+
+let noteOscA4;
+function makeBeepA4() {
+    noteOscA4 = audioContext.createOscillator();
+
+    noteOscA4.frequency.setValueAtTime(440, 0)
+    noteOscA4.type = 'triangle'
+
+    noteOscA4.connect(primaryGain);
+    noteOscA4.start();
 }
 function drawKeyA4() {
     let key = document.createElement('button')
 
-    key.addEventListener('mousedown', () => makeBeep(440))
-    key.addEventListener('mouseup', () => noteOsc.stop())
+    key.addEventListener('mousedown', () => makeBeepA4())
+    key.addEventListener('mouseup', () => noteOscA4.stop())
+    key.addEventListener('touchstart', () => makeBeepA4())
+    key.addEventListener('touchend', () => noteOscA4.stop())
 
+    key.innerText = 'A4'
     key.className = 'key'
     container.appendChild(key)
 }
-function drawKeyC5() {
-    let key = document.createElement('button')
 
-    key.addEventListener('mousedown', () => makeBeep(523.251))
-    key.addEventListener('mouseup', () => noteOsc.stop())
-
-    key.className = 'key'
-    container.appendChild(key)
-}
 const initBtn = document.querySelector('#init-btn')
 initBtn.addEventListener('click', () => {
     audioContext = new AudioContext()
@@ -50,5 +58,4 @@ initBtn.addEventListener('click', () => {
     initBtn.className = 'hide'
     drawKeyF4()
     drawKeyA4()
-    drawKeyC5()
 })
